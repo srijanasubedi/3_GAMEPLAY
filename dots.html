@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dots and Boxes</title>
+    <link rel="stylesheet" href="dots.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Dots & Boxes</h1>
+        <a href="game.html" class="btn-exit">Exit -Game</a>
+        <button class="btn-restart" onclick="initDotsGame()">🔄 Restart</button>
+    </div>
+
+    <div id="dots-winner-banner" class="winner-banner"></div>
+    
+    <div class="dots-players">
+        <div id="panel-p1" class="player-panel active-panel p1-panel">Player 1 (Red)<div id="dots-score1">Score: 0</div></div>
+        <div id="panel-p2" class="player-panel p2-panel">Player 2 (Blue)<div id="dots-score2">Score: 0</div></div>
+    </div>
+    
+    <div id="dots-board"></div>
+
+    <script src="dots.js"></script>
+</body>
+</html>
