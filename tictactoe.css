@@ -1,0 +1,65 @@
+body { font-family: 'Segoe UI', sans-serif; background-color: #dbeafe; margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; transition: background 0.3s; }
+.header { display: flex; align-items: center; gap: 15px; margin: 30px 0; }
+h1 { margin: 0; }
+.btn-exit, .btn-restart { padding: 10px 20px; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; }
+.btn-exit { background: #EF4444; } .btn-restart { background: #1F2937; }
+/* --- Action Buttons (Top Right Corner) --- */
+.action-btns { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    z-index: 100; 
+}
+
+/* Base button styles with an upgraded 'springy' transition */
+.btn-exit, .btn-restart { 
+    padding: 10px 20px; 
+    font-weight: bold; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); 
+    /* This cubic-bezier creates the 'pop' and 'bounce' physics */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+/* --- Restart Button --- */
+.btn-restart { 
+    background: hsl(215, 28%, 17%); 
+} 
+
+.btn-restart:hover { 
+    transform: scale(1.1) translateY(-2px); /* Lifts up slightly */
+    background: #4F46E5; /* Changes to a vibrant blurple */
+    box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4); /* Adds a colored glow */
+}
+
+/* --- Exit Button --- */
+.btn-exit { 
+    background: #EF4444; 
+} 
+
+.btn-exit:hover { 
+    transform: scale(1.15) translateY(-4px); /* Stronger pop-up scale */
+    background: #DC2626; /* Darkens the red slightly */
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.5); /* Heavy red drop shadow */
+}
+
+/* Optional: Add an active state for when the user physically clicks down */
+.btn-exit:active, .btn-restart:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.status { font-size: 2rem; font-weight: bold; margin-bottom: 20px; color: #3B82F6; }
+.ttt-board { display: grid; grid-template-columns: repeat(3, 120px); grid-template-rows: repeat(3, 120px); gap: 10px; background-color: #374151; padding: 10px; border-radius: 12px; }
+.ttt-cell { background-color: white; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: bold; cursor: pointer; border-radius: 8px; }
+.ttt-cell:hover { background-color: #F9FAFB; }
+
+.celebrate { animation: bounce 0.8s infinite; color: #10B981 !important; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
