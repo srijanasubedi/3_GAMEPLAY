@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snakes & Ladders</title>
+    <link rel="stylesheet" href="snakeladder.css">
+</head>
+<body>
+    <div class="action-btns">
+        <button class="btn-restart" onclick="resetSL()">🔄 Restart</button>
+        <a href="game.html" class="btn-exit">✖ Exit Game</a>
+    </div>
+
+    <div class="header">
+        <h1>Snakes & Ladders 🐍🪜</h1>
+    </div>
+
+    <div id="sl-winner-banner" class="winner-banner"></div>
+    <div id="sl-action-msg" class="action-message"></div>
+
+    <div class="sl-layout">
+        <div class="shared-dice-wrapper" id="flying-dice">
+            <div class="scene" onclick="rollDice()">
+                <div class="cube show-1" id="main-cube">
+                    <div class="face front">1</div><div class="face right">2</div><div class="face back">3</div>
+                    <div class="face left">4</div><div class="face top">5</div><div class="face bottom">6</div>
+                </div>
+            </div>
+            <div class="dice-label" id="dice-label" style="font-weight: bold; margin-top: 10px;">Roll Dice</div>
+        </div>
+
+        <div class="ns-panel" id="sl-panel-p1">
+            <h3 style="color: #DC2626;">Player 1</h3>
+           
+        </div>
+
+        <div class="sl-board-wrapper">
+            <div class="sl-board" id="sl-board"></div>
+            <svg class="sl-svg-overlay" id="sl-svg"></svg>
+        </div>
+        
+        <div class="ns-panel" id="sl-panel-p2">
+            <h3 style="color: #2563EB;">Player 2</h3>
+            
+        </div>
+    </div>
+
+    <script src="snakeladder.js"></script>
+</body>
+</html>
