@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+}
+
+.action-btns {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.btn-exit, .btn-restart {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-exit {
+    background: #EF4444;
+}
+
+.btn-exit:hover {
+    transform: scale(1.1) translateY(-2px);
+    background: #DC2626;
+    box-shadow: 0 8px 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn-restart {
+    background: #1F2937;
+}
+
+.btn-restart:hover {
+    transform: scale(1.1) translateY(-2px);
+    background: #4F46E5;
+    box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4);
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.game-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.hangman-visual {
+    flex: 0 0 180px;
+}
+
+.hangman-svg {
+    width: 100%;
+    height: auto;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.game-content {
+    flex: 1;
+}
+
+.word-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 12px;
+    text-align: center;
+    margin: 20px 0;
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 12px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.stat {
+    flex: 1;
+    background: #e0e7ff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat .label {
+    display: block;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat .value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.keyboard {
+    margin: 20px 0;
+}
+
+.letter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+    gap: 8px;
+}
+
+.letter-btn {
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.letter-btn:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    transform: scale(1.05);
+}
+
+.letter-btn:disabled {
+    background: #ddd;
+    color: #999;
+    border-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.message-box {
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-box.win {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.message-box.lose {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 600px) {
+    .game-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hangman-visual {
+        flex: 0 0 150px;
+    }
+
+    .word-display {
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+    }
+
+    .action-btns {
+        top: 10px;
+        right: 10px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
