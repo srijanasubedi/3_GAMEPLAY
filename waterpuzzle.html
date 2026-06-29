@@ -9,6 +9,8 @@
 <body>
     <div class="action-btns">
         <a href="game.html" class="btn-exit">← Back</a>
+        <button class="btn-undo" onclick="undoMove()" id="undoBtn">↶ Undo</button>
+        <button class="btn-hint" onclick="getHint()" id="hintBtn">💡 Hint</button>
         <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
     </div>
 
@@ -20,6 +22,10 @@
                 <div class="stat">
                     <span class="label">Moves:</span>
                     <span class="value" id="moves">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Hints Left:</span>
+                    <span class="value" id="hints">3</span>
                 </div>
                 <div class="stat">
                     <span class="label">Level:</span>

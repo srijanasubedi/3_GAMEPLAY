@@ -24,7 +24,7 @@ body {
     z-index: 100;
 }
 
-.btn-exit, .btn-restart {
+.btn-exit, .btn-restart, .btn-undo, .btn-hint {
     padding: 10px 20px;
     font-weight: bold;
     color: white;
@@ -57,6 +57,36 @@ body {
     box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4);
 }
 
+.btn-undo {
+    background: #F59E0B;
+}
+
+.btn-undo:hover:not(:disabled) {
+    transform: scale(1.1) translateY(-2px);
+    background: #D97706;
+    box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4);
+}
+
+.btn-undo:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-hint {
+    background: #8B5CF6;
+}
+
+.btn-hint:hover:not(:disabled) {
+    transform: scale(1.1) translateY(-2px);
+    background: #7C3AED;
+    box-shadow: 0 8px 15px rgba(139, 92, 246, 0.4);
+}
+
+.btn-hint:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .container {
     background: white;
     border-radius: 20px;
@@ -87,6 +117,7 @@ body {
     display: flex;
     gap: 20px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .stat {
@@ -146,6 +177,20 @@ body {
     box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
 }
 
+.tube.hint-source {
+    border-color: #10B981;
+    border-width: 4px;
+    background: linear-gradient(to bottom, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.tube.hint-target {
+    border-color: #3B82F6;
+    border-width: 4px;
+    background: linear-gradient(to bottom, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
 .tube.disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -179,11 +224,20 @@ body {
     font-weight: bold;
     margin-top: 20px;
     min-height: 30px;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .message.win {
     color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
     animation: bounce 0.6s ease-in-out;
+}
+
+.message.hint {
+    color: #8B5CF6;
+    background: rgba(139, 92, 246, 0.1);
+    animation: slideDown 0.4s ease;
 }
 
 @keyframes bounce {
@@ -191,9 +245,33 @@ body {
     50% { transform: translateY(-10px); }
 }
 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
+    }
+
+    .action-btns {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .btn-exit, .btn-restart, .btn-undo, .btn-hint {
+        padding: 8px 12px;
+        font-size: 0.9rem;
     }
 
     .game-board {

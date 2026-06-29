@@ -6,16 +6,22 @@ let selectedTube = null;
 let moves = 0;
 let level = 1;
 let gameWon = false;
+let hintsLeft = 3;
+let moveHistory = [];
 
 function initGame() {
     tubes = [];
     selectedTube = null;
     moves = 0;
     gameWon = false;
+    moveHistory = [];
+    hintsLeft = 3;
     document.getElementById('message').textContent = '';
     document.getElementById('message').className = 'message';
     document.getElementById('moves').textContent = moves;
+    document.getElementById('hints').textContent = hintsLeft;
     document.getElementById('level').textContent = level;
+    updateButtonStates();
 
     const numTubes = 4 + level;
     const numColors = numTubes - 2;
@@ -51,13 +57,25 @@ function initGame() {
     renderBoard();
 }
 
-function renderBoard() {
+function renderBoard(hintTubes = null) {
     const board = document.getElementById('gameBoard');
     board.innerHTML = '';
 
     tubes.forEach((tube, tubeIndex) => {
         const tubeDiv = document.createElement('div');
-        tubeDiv.className = `tube ${selectedTube === tubeIndex ? 'selected' : ''}`;
+        let className = 'tube';
+        
+        if (selectedTube === tubeIndex) {
+            className += ' selected';
+        }
+        if (hintTubes && hintTubes.source === tubeIndex) {
+            className += ' hint-source';
+        }
+        if (hintTubes && hintTubes.target === tubeIndex) {
+            className += ' hint-target';
+        }
+        
+        tubeDiv.className = className;
         tubeDiv.onclick = () => handleTubeClick(tubeIndex);
 
         tube.forEach(color => {
@@ -83,6 +101,9 @@ function renderBoard() {
 function handleTubeClick(tubeIndex) {
     if (gameWon) return;
 
+    // Clear hint display
+    clearMessageIfHint();
+
     if (selectedTube === null) {
         // Select a tube
         if (tubes[tubeIndex].length > 0) {
@@ -97,6 +118,8 @@ function handleTubeClick(tubeIndex) {
         } else {
             // Try to pour
             if (canPour(selectedTube, tubeIndex)) {
+                // Save state before pouring
+                saveMove();
                 pour(selectedTube, tubeIndex);
                 moves++;
                 document.getElementById('moves').textContent = moves;
@@ -151,11 +174,82 @@ function checkWin() {
         const message = document.getElementById('message');
         message.className = 'message win';
         message.textContent = `🎉 Level ${level} Complete! (${moves} moves)`;
+        updateButtonStates();
         setTimeout(() => {
             level++;
             initGame();
         }, 2000);
     }
+}
+
+function saveMove() {
+    // Deep copy current state
+    moveHistory.push(tubes.map(tube => [...tube]));
+}
+
+function undoMove() {
+    if (moveHistory.length === 0) return;
+
+    tubes = moveHistory.pop();
+    moves = Math.max(0, moves - 1);
+    selectedTube = null;
+    document.getElementById('moves').textContent = moves;
+    renderBoard();
+    updateButtonStates();
+    clearMessageIfHint();
+}
+
+function getHint() {
+    if (hintsLeft <= 0) {
+        const message = document.getElementById('message');
+        message.className = 'message';
+        message.textContent = '❌ No hints left!';
+        return;
+    }
+
+    // Find a valid move
+    let hintFound = false;
+    
+    for (let i = 0; i < tubes.length && !hintFound; i++) {
+        if (tubes[i].length === 0) continue;
+        
+        for (let j = 0; j < tubes.length && !hintFound; j++) {
+            if (i !== j && canPour(i, j)) {
+                // Show hint
+                hintsLeft--;
+                document.getElementById('hints').textContent = hintsLeft;
+                
+                const message = document.getElementById('message');
+                message.className = 'message hint';
+                message.textContent = '💡 Hint: Pour from tube ' + (i + 1) + ' to tube ' + (j + 1);
+                
+                // Highlight tubes
+                renderBoard({ source: i, target: j });
+                hintFound = true;
+                updateButtonStates();
+                break;
+            }
+        }
+    }
+
+    if (!hintFound) {
+        const message = document.getElementById('message');
+        message.className = 'message';
+        message.textContent = '🤔 No valid moves available!';
+    }
+}
+
+function clearMessageIfHint() {
+    const message = document.getElementById('message');
+    if (message.className.includes('hint')) {
+        message.textContent = '';
+        message.className = 'message';
+    }
+}
+
+function updateButtonStates() {
+    document.getElementById('undoBtn').disabled = moveHistory.length === 0 || gameWon;
+    document.getElementById('hintBtn').disabled = hintsLeft <= 0 || gameWon;
 }
 
 function resetGame() {
