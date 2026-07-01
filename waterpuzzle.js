@@ -191,6 +191,7 @@ function undoMove() {
     if (moveHistory.length === 0) return;
 
     tubes = moveHistory.pop();
+    tubes = tubes.map(tube => [...tube]); // Deep copy
     moves = Math.max(0, moves - 1);
     selectedTube = null;
     document.getElementById('moves').textContent = moves;
@@ -209,24 +210,17 @@ function getHint() {
 
     // Find a valid move
     let hintFound = false;
+    let sourceIndex = -1;
+    let targetIndex = -1;
     
     for (let i = 0; i < tubes.length && !hintFound; i++) {
         if (tubes[i].length === 0) continue;
         
         for (let j = 0; j < tubes.length && !hintFound; j++) {
             if (i !== j && canPour(i, j)) {
-                // Show hint
-                hintsLeft--;
-                document.getElementById('hints').textContent = hintsLeft;
-                
-                const message = document.getElementById('message');
-                message.className = 'message hint';
-                message.textContent = '💡 Hint: Pour from tube ' + (i + 1) + ' to tube ' + (j + 1);
-                
-                // Highlight tubes
-                renderBoard({ source: i, target: j });
+                sourceIndex = i;
+                targetIndex = j;
                 hintFound = true;
-                updateButtonStates();
                 break;
             }
         }
@@ -236,7 +230,42 @@ function getHint() {
         const message = document.getElementById('message');
         message.className = 'message';
         message.textContent = '🤔 No valid moves available!';
+        return;
     }
+
+    // Show hint with highlighting
+    hintsLeft--;
+    document.getElementById('hints').textContent = hintsLeft;
+    
+    const message = document.getElementById('message');
+    message.className = 'message hint';
+    message.textContent = `💡 Hint: Pour from tube ${sourceIndex + 1} to tube ${targetIndex + 1}`;
+    
+    // Highlight tubes
+    renderBoard({ source: sourceIndex, target: targetIndex });
+    
+    // Wait 2 seconds then make the move automatically
+    setTimeout(() => {
+        if (!gameWon) {
+            saveMove();
+            pour(sourceIndex, targetIndex);
+            moves++;
+            document.getElementById('moves').textContent = moves;
+            renderBoard();
+            
+            // Clear hint message
+            message.textContent = '✅ Hint move executed!';
+            message.className = 'message hint';
+            
+            setTimeout(() => {
+                message.textContent = '';
+                message.className = 'message';
+            }, 1500);
+            
+            checkWin();
+        }
+        updateButtonStates();
+    }, 2000);
 }
 
 function clearMessageIfHint() {
