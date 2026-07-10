@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wood Block Puzzle</title>
+    <link rel="stylesheet" href="woodblock.css">
+</head>
+<body>
+    <div class="action-btns">
+        <a href="game.html" class="btn-exit">← Back</a>
+        <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🧱 Wood Block Puzzle</h1>
+            <p>Fill rows, columns, or diagonals to score points!</p>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">Score:</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Level:</span>
+                    <span class="value" id="level">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-wrapper">
+            <div class="game-area">
+                <div class="game-board" id="gameBoard"></div>
+            </div>
+            <div class="pieces-area">
+                <h3>Available Pieces</h3>
+                <div class="pieces-container" id="piecesContainer"></div>
+            </div>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="woodblock.js"></script>
+</body>
+</html>
