@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snakes & Ladders</title>
+    <link rel="stylesheet" href="snakeladder.css">
+</head>
+<body>
+    <div class="action-btns">
+        <a href="../game.html" class="btn-exit">← Back</a>
+        <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
+    </div>
+
+    <div class="header">
+        <h1>🎲 Snakes & Ladders</h1>
+    </div>
+
+    <div class="game-container">
+        <div class="board" id="board"></div>
+        <div class="controls">
+            <div class="info-panel">
+                <div class="info">
+                    <span class="label">Your Position:</span>
+                    <span class="value" id="position">1</span>
+                </div>
+                <div class="info">
+                    <span class="label">Dice Value:</span>
+                    <span class="value" id="diceValue">0</span>
+                </div>
+            </div>
+            <button class="btn-roll" onclick="rollDice()">🎲 Roll Dice</button>
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script src="snakeladder.js"></script>
+</body>
+</html>

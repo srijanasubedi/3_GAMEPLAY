@@ -60,7 +60,7 @@
             background: var(--card-bg);
             border-radius: 16px;
             overflow: hidden;
-            text-decoration: none; /* Removes underline from links */
+            text-decoration: none;
             color: inherit;
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
             transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
@@ -80,6 +80,11 @@
             height: 220px;
             overflow: hidden;
             border-bottom: 4px solid var(--primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
         }
 
         .card-image-container img {
@@ -132,26 +137,26 @@
 <body>
 
     <div class="header">
-        <h1>🎮Siru Game Hub</h1>
+        <h1>🎮 Siru Game Hub</h1>
         <p>Select a game below to start playing</p>
     </div>
 
     <div class="game-grid">
         
-        <a href="tictactoe.html" class="game-card">
+        <a href="Tic-Tac-Toe/tictactoe-mode.html" class="game-card">
             <div class="card-image-container">
-                <img src="https://images.unsplash.com/photo-1668901382969-8c73e450a1f5?q=80&w=600&auto=format&fit=crop" alt="Tic Tac Toe Neon">
+                🎯
             </div>
             <div class="card-content">
                 <h2>Tic-Tac-Toe</h2>
-                <p>The classic X's and O's game. Challenge a friend and try to get three in a row!</p>
+                <p>Play against a friend or challenge the AI! Choose your mode and start playing.</p>
                 <div class="play-badge">Play Now ▶</div>
             </div>
         </a>
 
-        <a href="dots.html" class="game-card">
+        <a href="Dots-Boxes/dots.html" class="game-card">
             <div class="card-image-container">
-                <img src="https://images.unsplash.com/photo-1614036417651-1d4b141505c8?q=80&w=600&auto=format&fit=crop" alt="Dots abstract pattern">
+                🔲
             </div>
             <div class="card-content">
                 <h2>Dots & Boxes</h2>
@@ -160,9 +165,9 @@
             </div>
         </a>
 
-        <a href="snakeladder.html" class="game-card">
+        <a href="Snakes-Ladders/snakeladder.html" class="game-card">
             <div class="card-image-container">
-                <img src="https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?q=80&w=600&auto=format&fit=crop" alt="Dice rolling">
+                🎲
             </div>
             <div class="card-content">
                 <h2>Snakes & Ladders</h2>
@@ -171,9 +176,9 @@
             </div>
         </a>
 
-        <a href="hangman.html" class="game-card">
+        <a href="Hangman/hangman.html" class="game-card">
             <div class="card-image-container">
-                <img src="https://images.unsplash.com/photo-1546883656-68acb628a840?q=80&w=600&auto=format&fit=crop" alt="Word puzzle game">
+                🎤
             </div>
             <div class="card-content">
                 <h2>Hangman</h2>
@@ -181,16 +186,29 @@
                 <div class="play-badge">Play Now ▶</div>
             </div>
         </a>
-  <a href="waterpuzzle.html" class="game-card">
+
+        <a href="Water-Sort-Puzzle/waterpuzzle.html" class="game-card">
             <div class="card-image-container">
-                <img src="https://images.unsplash.com/photo-1546883656-68acb628a840?q=80&w=600&auto=format&fit=crop" alt="Word puzzle game">
+                💧
             </div>
             <div class="card-content">
-                <h2>water puzzle </h2>
-                <p>Fill the bottle with matching colors and make it creative.</p>
+                <h2>Water Sort Puzzle</h2>
+                <p>Sort the water colors into matching tubes! Can you solve all the levels?</p>
                 <div class="play-badge">Play Now ▶</div>
             </div>
         </a>
+
+        <a href="Wood-Block-Puzzle/woodblock.html" class="game-card">
+            <div class="card-image-container">
+                🧱
+            </div>
+            <div class="card-content">
+                <h2>Wood Block Puzzle</h2>
+                <p>Fill rows, columns, or diagonals with wood pieces to score points and level up!</p>
+                <div class="play-badge">Play Now ▶</div>
+            </div>
+        </a>
+
     </div>
 
 </body>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Sort Puzzle</title>
+    <link rel="stylesheet" href="waterpuzzle.css">
+</head>
+<body>
+    <div class="action-btns">
+        <a href="../game.html" class="btn-exit">← Back</a>
+        <button class="btn-undo" onclick="undoMove()" id="undoBtn">↶ Undo</button>
+        <button class="btn-hint" onclick="getHint()" id="hintBtn">💡 Hint</button>
+        <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>💧 Water Sort Puzzle</h1>
+            <p>Sort the water colors into matching tubes!</p>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">Moves:</span>
+                    <span class="value" id="moves">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Hints Left:</span>
+                    <span class="value" id="hints">3</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Level:</span>
+                    <span class="value" id="level">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard"></div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="waterpuzzle.js"></script>
+</body>
+</html>
