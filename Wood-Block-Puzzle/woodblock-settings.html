@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wood Block Puzzle - Settings</title>
+    <link rel="stylesheet" href="./woodblock.css">
+</head>
+<body>
+    <div class="action-btns">
+        <a href="../game.html" class="btn-exit">← Back</a>
+    </div>
+
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>🧱 Wood Block Puzzle</h1>
+            <p>Choose your game settings</p>
+        </div>
+
+        <div class="settings-content">
+            <!-- Grid Size Selection -->
+            <div class="setting-section">
+                <h2>Grid Size</h2>
+                <div class="option-buttons">
+                    <button class="option-btn" onclick="selectGridSize(5)">5×5</button>
+                    <button class="option-btn" onclick="selectGridSize(8)">8×8</button>
+                    <button class="option-btn active" onclick="selectGridSize(10)">10×10</button>
+                </div>
+            </div>
+
+            <!-- Difficulty Level Selection -->
+            <div class="setting-section">
+                <h2>Difficulty Level</h2>
+                <div class="option-buttons">
+                    <button class="option-btn" onclick="selectDifficulty('easy')">
+                        <div class="level-icon">🟢</div>
+                        <div class="level-name">Easy</div>
+                    </button>
+                    <button class="option-btn active" onclick="selectDifficulty('medium')">
+                        <div class="level-icon">🟡</div>
+                        <div class="level-name">Medium</div>
+                    </button>
+                    <button class="option-btn" onclick="selectDifficulty('hard')">
+                        <div class="level-icon">🔴</div>
+                        <div class="level-name">Hard</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <button class="btn-start" onclick="startGame()">🎮 Start Game</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedGridSize = 10;
+        let selectedDifficulty = 'medium';
+
+        function selectGridSize(size) {
+            selectedGridSize = size;
+            document.querySelectorAll('.setting-section:nth-child(1) .option-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function selectDifficulty(level) {
+            selectedDifficulty = level;
+            document.querySelectorAll('.setting-section:nth-child(2) .option-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.option-btn').classList.add('active');
+        }
+
+        function startGame() {
+            // Store settings in sessionStorage
+            sessionStorage.setItem('gridSize', selectedGridSize);
+            sessionStorage.setItem('difficulty', selectedDifficulty);
+            // Redirect to game
+            window.location.href = './woodblock.html';
+        }
+    </script>
+</body>
+</html>

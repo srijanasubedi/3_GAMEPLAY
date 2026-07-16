@@ -57,11 +57,122 @@ body {
     box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4);
 }
 
+/* Settings Page Styles */
+.settings-container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.settings-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.settings-header h1 {
+    font-size: 2.5rem;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.settings-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.setting-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.setting-section h2 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.option-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+}
+
+.option-btn {
+    padding: 15px 20px;
+    border: 3px solid #e5e7eb;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #666;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.option-btn:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.option-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.level-icon {
+    font-size: 1.5rem;
+}
+
+.level-name {
+    font-size: 0.9rem;
+}
+
+.btn-start {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    margin-top: 20px;
+}
+
+.btn-start:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.btn-start:active {
+    transform: translateY(-1px);
+}
+
+/* Game Page Styles */
 .container {
     background: white;
     border-radius: 20px;
     padding: 40px;
-    max-width: 1000px;
+    max-width: 1200px;
     width: 100%;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
@@ -121,22 +232,20 @@ body {
 .game-area {
     display: flex;
     justify-content: center;
+    overflow-x: auto;
 }
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(10, 50px);
-    grid-template-rows: repeat(10, 50px);
     gap: 4px;
     padding: 15px;
     background: linear-gradient(to bottom, #f9fafb, #f0f4ff);
     border-radius: 12px;
     border: 3px solid #e5e7eb;
+    user-select: none;
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
     background: white;
     border: 2px solid #ddd;
     border-radius: 6px;
@@ -200,8 +309,6 @@ body {
 
 .wood-piece {
     display: grid;
-    grid-template-columns: repeat(3, 30px);
-    grid-template-rows: repeat(3, 30px);
     gap: 3px;
     padding: 8px;
     background: white;
@@ -211,6 +318,11 @@ body {
     transition: all 0.2s ease;
 }
 
+.wood-piece:active {
+    cursor: grabbing;
+    opacity: 0.8;
+}
+
 .wood-piece:hover {
     transform: scale(1.05);
     border-color: #667eea;
@@ -218,15 +330,14 @@ body {
 }
 
 .wood-piece.dragging {
-    opacity: 0.7;
+    opacity: 0.5;
     transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    z-index: 1000;
 }
 
 .wood-block {
-    width: 30px;
-    height: 30px;
     border-radius: 4px;
-    background: #FF6B6B;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -271,11 +382,6 @@ body {
     }
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
 @media (max-width: 900px) {
     .game-wrapper {
         grid-template-columns: 1fr;
@@ -292,11 +398,6 @@ body {
         flex-wrap: wrap;
         gap: 10px;
     }
-
-    .wood-piece {
-        grid-template-columns: repeat(2, 30px);
-        grid-template-rows: repeat(2, 30px);
-    }
 }
 
 @media (max-width: 600px) {
@@ -304,19 +405,15 @@ body {
         padding: 20px;
     }
 
-    .game-board {
-        grid-template-columns: repeat(8, 40px);
-        grid-template-rows: repeat(8, 40px);
-        gap: 3px;
-        padding: 10px;
-    }
-
-    .cell {
-        width: 40px;
-        height: 40px;
+    .settings-container {
+        padding: 20px;
     }
 
     .header h1 {
         font-size: 1.8rem;
+    }
+
+    .option-buttons {
+        grid-template-columns: 1fr;
     }
 }
