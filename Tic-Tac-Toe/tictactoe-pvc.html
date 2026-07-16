@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Human vs Computer</title>
+    <link rel="stylesheet" href="./tictactoe.css">
+</head>
+<body>
+
+    <div class="action-btns">
+        <a href="tictactoe-mode.html" class="btn-exit">← Back</a>
+        <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Human vs Computer</h1>
+            <div class="current-player">Your move (X)</div>
+            <div class="status" id="status"></div>
+        </div>
+
+        <div class="board" id="board"></div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="./tictactoe-ai.js"></script>
+</body>
+</html>
