@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="memory.css">
+</head>
+<body>
+    <div id="modeSelection" class="mode-selection">
+        <div class="mode-container">
+            <h1>🎮 Memory Game</h1>
+            <p>Select Game Mode</p>
+            <div class="mode-buttons">
+                <button id="twoPlayerBtn" class="mode-btn" onclick="startGame('2player')">
+                    <span class="icon">👥</span>
+                    <span class="text">2 Players</span>
+                </button>
+                <button id="botPlayerBtn" class="mode-btn" onclick="startGame('bot')">
+                    <span class="icon">🤖</span>
+                    <span class="text">vs Bot</span>
+                </button>
+            </div>
+            <a href="game.html" class="back-btn">← Back to Games</a>
+        </div>
+    </div>
+
+    <div id="gameContainer" class="game-container hidden">
+        <div class="game-header">
+            <div class="game-title">
+                <h1>🧠 Memory Game</h1>
+                <button class="back-home-btn" onclick="backToMode()">← Back</button>
+            </div>
+            <div class="score-board">
+                <div class="player-score">
+                    <span class="player-label" id="player1Label">Player 1</span>
+                    <span class="player-points" id="player1Score">0</span>
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="player-score">
+                    <span class="player-label" id="player2Label">Player 2</span>
+                    <span class="player-points" id="player2Score">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="current-turn" id="currentTurn">Player 1's Turn</div>
+
+        <div class="game-board" id="gameBoard"></div>
+
+        <div class="game-info">
+            <div class="moves-counter">Matches Found: <span id="matchesFound">0</span>/8</div>
+            <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+        </div>
+
+        <div id="winnerModal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="winnerText"></h2>
+                <button onclick="resetGame()" class="btn-primary">Play Again</button>
+                <button onclick="backToMode()" class="btn-secondary">Back to Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="memory.js"></script>
+</body>
+</html>
