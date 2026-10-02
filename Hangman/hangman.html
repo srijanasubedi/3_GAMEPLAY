@@ -4,20 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman Game</title>
-    <link rel="stylesheet" href="./hangman.css">
+    <link rel="stylesheet" href="../hangman.css">
 </head>
 <body>
-    <div class="action-btns">
+    <div class="header">
+        <h1>🎤 Hangman</h1>
         <a href="../game.html" class="btn-exit">← Back</a>
         <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
     </div>
 
     <div class="container">
-        <div class="header">
-            <h1>🎤 Hangman</h1>
-            <p>Guess the word letter by letter!</p>
-        </div>
-
         <div class="game-wrapper">
             <div class="hangman-visual">
                 <svg viewBox="0 0 200 250" class="hangman-svg">
@@ -70,6 +66,6 @@
         </div>
     </div>
 
-    <script src="./hangman.js"></script>
+    <script src="../hangman.js"></script>
 </body>
 </html>
