@@ -100,8 +100,66 @@ function renderPieces() {
     });
 }
 
+function createDragImage(piece) {
+    // Create a clean drag image showing only the blocks
+    const dragCanvas = document.createElement('canvas');
+    const blockSize = 30;
+    const gap = 3;
+    const padding = 5;
+    
+    // Calculate canvas size
+    const maxDim = Math.max(piece.shape.length, piece.shape[0]?.length || 0);
+    const canvasSize = maxDim * blockSize + (maxDim - 1) * gap + padding * 2;
+    
+    dragCanvas.width = canvasSize;
+    dragCanvas.height = canvasSize;
+    const ctx = dragCanvas.getContext('2d');
+    
+    // Draw semi-transparent background
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvasSize, canvasSize);
+    
+    // Draw blocks
+    const colorMap = {
+        1: '#FF6B6B', 2: '#4ECDC4', 3: '#45B7D1', 4: '#FFA07A',
+        5: '#F7DC6F', 6: '#BB8FCE', 7: '#85C1E2', 8: '#F8B4D8'
+    };
+    
+    piece.shape.forEach((row, i) => {
+        row.forEach((cell, j) => {
+            if (cell) {
+                const x = padding + j * (blockSize + gap);
+                const y = padding + i * (blockSize + gap);
+                
+                ctx.fillStyle = colorMap[piece.color];
+                ctx.fillRect(x, y, blockSize, blockSize);
+                
+                // Add border
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(x, y, blockSize, blockSize);
+                
+                // Add shadow effect
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 4;
+            }
+        });
+    });
+    
+    return dragCanvas;
+}
+
 function handleDragStart(e, pieceIndex) {
     selectedPiece = pieceIndex;
+    const piece = availablePieces[pieceIndex];
+    
+    // Create and set custom drag image
+    const dragImage = createDragImage(piece);
+    e.dataTransfer.setDragImage(dragImage, 0, 0);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('pieceIndex', pieceIndex);
+    
+    // Add visual feedback to the piece
     e.currentTarget.classList.add('dragging');
 }
 
@@ -123,6 +181,7 @@ function setupBoardDropZones() {
     const board = document.getElementById('gameBoard');
     board.addEventListener('dragover', handleDragOver);
     board.addEventListener('drop', handleDrop);
+    board.addEventListener('dragleave', handleDragLeave);
 }
 
 function handleDragOver(e) {
@@ -130,11 +189,18 @@ function handleDragOver(e) {
     e.currentTarget.style.background = 'rgba(102, 126, 234, 0.1)';
 }
 
+function handleDragLeave(e) {
+    if (e.currentTarget === e.target) {
+        e.currentTarget.style.background = '';
+    }
+}
+
 function handleDrop(e) {
     e.preventDefault();
     e.currentTarget.style.background = '';
     
-    if (selectedPiece === null) return;
+    const pieceIndex = parseInt(e.dataTransfer.getData('pieceIndex'));
+    if (isNaN(pieceIndex)) return;
     
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -143,7 +209,7 @@ function handleDrop(e) {
     const col = Math.floor(x / (CELL_SIZE + 4));
     const row = Math.floor(y / (CELL_SIZE + 4));
     
-    placePiece(selectedPiece, row, col);
+    placePiece(pieceIndex, row, col);
 }
 
 function placePiece(pieceIndex, startRow, startCol) {
