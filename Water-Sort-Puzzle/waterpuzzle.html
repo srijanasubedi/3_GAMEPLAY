@@ -4,23 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water Sort Puzzle</title>
-    <link rel="stylesheet" href="waterpuzzle.css">
+    <link rel="stylesheet" href="../waterpuzzle.css">
 </head>
 <body>
-    <div class="action-btns">
+    <div class="header">
+        <h1>💧 Water Sort Puzzle</h1>
         <a href="../game.html" class="btn-exit">← Back</a>
         <button class="btn-restart" onclick="resetGame()">🔄 New Game</button>
     </div>
 
     <div class="container">
-        <h1>💧 Water Sort Puzzle</h1>
         <div class="game-info">
-            <div>Moves: <span id="moves">0</span></div>
+            <div class="info-item">
+                <span class="label">Level:</span>
+                <span class="value" id="level">1</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Moves:</span>
+                <span class="value" id="moves">0</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Hints:</span>
+                <span class="value" id="hints">3</span>
+            </div>
         </div>
+
         <div class="game-board" id="gameBoard"></div>
+
+        <div class="controls">
+            <button id="undoBtn" class="btn-control" onclick="undoMove()">↶ Undo</button>
+            <button id="hintBtn" class="btn-control" onclick="getHint()">💡 Hint</button>
+        </div>
+
         <div id="message" class="message"></div>
     </div>
 
-    <script src="waterpuzzle.js"></script>
+    <script src="../waterpuzzle.js"></script>
 </body>
 </html>
